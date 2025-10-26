@@ -40,8 +40,9 @@ public class Warehouse {
 
     public void updateProductPrice(UUID id, BigDecimal newPrice) {
         Product product = products.get(id);
-        if (product == null)
+        if (product == null){
             throw new NoSuchElementException("Product not found with id: " + id);
+        }
         product.price(newPrice);
         changedProducts.add(product);
     }
