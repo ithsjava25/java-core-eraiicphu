@@ -1,6 +1,5 @@
 package com.example;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -19,12 +18,15 @@ public class Category {
     }
 
     public static Category of(String name) {
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("name cannot be null or blank");
+        if (name == null) {
+            throw new IllegalArgumentException("Category name can't be null");
+        }
+        String trimmedName = name.trim();
+        if (trimmedName.isEmpty()) {
+            throw new IllegalArgumentException("Category name can't be blank");
         }
         String normalizedName = normalize(name);
 
-        // Compute and store if absent
         return cache.computeIfAbsent(normalizedName, newCat -> new Category(normalizedName));
     }
 
